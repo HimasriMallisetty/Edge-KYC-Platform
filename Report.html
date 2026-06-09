@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detailed Report</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.5;
+        min-height: 100vh;
+        min-width: 100vw;
+      }
+
+      .container {
+        max-width: 100%;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 1rem 3rem;
+      }
+      .logo {
+        display: flex;
+        justify-content: start;
+        width: 100px;
+      }
+      /* Header Section */
+      header {
+        text-align: center;
+        padding: 20px;
+      }
+
+      header img {
+        max-width: 120px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+
+      header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 16px;
+        font-weight: 400;
+        color: #555;
+      }
+
+      /* Report Section */
+      .report {
+        padding: 20px;
+      }
+
+      .report h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .report-section {
+        padding: 20px;
+        page-break-inside: avoid; 
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+      .report-section h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+        text-decoration: underline;
+      }
+      .report-row {
+        display: flex;
+        page-break-inside: avoid; 
+        justify-content: space-between;
+        padding-bottom: 10px;
+      }
+
+      .report-row:last-child {
+        border-bottom: none;
+      }
+
+      .report-row p {
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        font-weight: 400;
+        color: #333;
+        margin: 0;
+      }
+      .report-row p > span {
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+        color: #787878;
+        margin: 0;
+      }
+
+      .report-row p strong {
+        color: #000;
+        font-weight: 600;
+      }
+
+      /* Filing Details Section */
+      .filing-details {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 40px;
+      }
+
+      .filing-details h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #696969;
+      }
+      
+      .filing-details p {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 4px;
+        color: #696969;
+      }
+
+      .filing-details p strong {
+        color: #696969;
+        font-weight: 600;
+      }
+      p, h2, h3, .filing-details {
+        page-break-inside: avoid;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <header>
+        <img
+          class="logo"
+          src="https://auditedge.in/images/auditEdgeLogo.svg"
+          alt="Logo"
+        />
+      </header>
+
+      <!-- Report Section -->
+      <section class="report">
+        <div class="filing-details">
+          <p><strong>File Number: {{ report_data.File_Number }}</strong></p>
+          <p><strong>Performed By: {{ report_data.Performed_By }}</strong></p>
+          <p><strong>Initiation Date: {{ report_data.Initiation_Date }}</strong></p>
+          <p><strong>Completion Date: {{ report_data.Completion_Date }}</strong></p>
+        </div>
+
+        <h2>Detailed Report</h2>
+
+       
+        {% for type_name, details in grouped_report.items %}
+        <div class="report-section">
+          <h3>{{ type_name }}</h3>
+          {% for detail in details %}
+          <div class="report-row">
+            <p><strong>{{ detail.field_name }}:</strong> {{ detail.value }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+
+      </section>
+    </div>
+  </body>
+</html>
